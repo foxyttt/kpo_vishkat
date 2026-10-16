@@ -1,6 +1,6 @@
 namespace kpo_vishkat.Models;
 
-public interface iEnergyCustomer
+public interface iEnergyCustomer : iInventoryItem
 {
     double EnergyConsumption {get; }
 }

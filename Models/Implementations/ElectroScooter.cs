@@ -1,13 +1,20 @@
 using kpo_vishkat.Models;
+using System.Diagnostics.Contracts;
 
 namespace kpo_vishkat.Models;
 
-public sealed class ElectroBicycle : iTransport, iInventoryItem, iEnergyCustomer
+public sealed class ElectroScooter : iTransport, iEnergyCustomer
 {
-    int iInventoryItem;
-    string Name = "ElectroScooter";
+    public string InventoryNumber { get; }
+    public string Name {  get; }
+    public double EnergyConsumption {  get; }
+    public int Simplicity { get; }
 
-    double EnergyConsumption = 5;
-    int Simplicity = 6;
-    
+    public ElectroScooter(string inventoryNumber, string name, double energyConsumption, int simplicity)
+    {
+        InventoryNumber = inventoryNumber;
+        Name = name;
+        EnergyConsumption = energyConsumption;
+        Simplicity = simplicity;
+    }
 }

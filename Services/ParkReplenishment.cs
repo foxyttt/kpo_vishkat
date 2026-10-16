@@ -2,18 +2,18 @@ using kpo_vishkat.Models;
 
 namespace kpo_vishkat.Services;
 
-public class FleetService
+public class ParkReplenishment
 {
-    private readonly IServiceCenter _serviceCenter;
+    private readonly iServiceCenter _serviceCenter;
     private readonly Park _park;
 
-    public FleetService(IServiceCenter serviceCenter, Park park)
+    public ParkReplenishment(iServiceCenter serviceCenter, Park park)
     {
         _serviceCenter = serviceCenter;
         _park = park;
     }
 
-    public bool TryAddTransport(ITransport transport)
+    public bool TryAddTransport(iTransport transport)
     {
         if (!_serviceCenter.Accept(transport))
         {
@@ -25,7 +25,7 @@ public class FleetService
         return true;
     }
 
-    public void AddItem(IInventoryItem item)
+    public void AddItem(iInventoryItem item)
     {
         _park.AddItem(item);
     }

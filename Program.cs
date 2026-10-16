@@ -1,43 +1,46 @@
-using Microsoft.Extensions.DependencyInjection;
+using kpo_vishkat.ConsoleUI;
 using kpo_vishkat.Models;
 using kpo_vishkat.Services;
 using kpo_vishkat.Services.Implementations;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace kpo_vishkat;
 
 internal class Program
 {
-    private static void Main(string[] args)
+    private static int Main(string[] args)
     {
-        // 1. Настраиваем DI-контейнер.
         var services = new ServiceCollection();
 
         services.AddSingleton<Park>();
-        services.AddSingleton<IServiceCenter, ServiceCenter>();
+        services.AddSingleton<iServiceCenter, ServiceCenter>();
         services.AddSingleton<ParkReplenishment>();
 
-        using var serviceProvider = services.BuildServiceProvider();
+        services.AddSingleton<iReportService, TransportCountReportService>();
+        services.AddSingleton<iReportService, EnergyConsumptionReportService>();
+        services.AddSingleton<iReportService, BeginnerFriendlyReportService>();
+        services.AddSingleton<iReportService, InventoryReportService>();
 
-        var park = serviceProvider.GetRequiredService<Park>();
-        var parkReplenishment = serviceProvider.GetRequiredService<FleetService>();
+        services.AddSingleton<ConsoleApplication>();
+        services.AddSingleton<DemoRunner>();
 
-        var scooter = new ElectroScooter("SC-001", "Электросамокат Xiaomi", 8, 1.5);
+        using var provider = services.BuildServiceProvider();
 
-        var helmet = new Helmet("HM-001", "Защитный шлем");
-
-        bool accepted = parkReplenishment.TryAddTransport(scooter);
-
-        Console.WriteLine(accepted ? $"Транспорт {scooter.Name} принят в парк." : $"Транспорт {scooter.Name} не прошёл техосмотр.");
-
-        fleetService.AddItem(helmet);
-
-        Console.WriteLine($"Вещь {helmet.Name} добавлена на баланс.");
-
-        Console.WriteLine("\nИнвентаризация:");
-
-        foreach (var item in park.Items)
+        if (args.Length == 1 &&
+            string.Equals(args[0], "--demo", StringComparison.OrdinalIgnoreCase))
         {
-            Console.WriteLine($"{item.Name} | Инвентарный номер: {item.InventoryNumber}");
+            provider.GetRequiredService<DemoRunner>().Run();
+            return 0;
         }
+
+        if (args.Length > 0)
+        {
+            Console.WriteLine("Неизвестные аргументы.");
+            Console.WriteLine("Использование: kpo_vishkat [--demo]");
+            return 1;
+        }
+
+        provider.GetRequiredService<ConsoleApplication>().Run();
+        return 0;
     }
 }

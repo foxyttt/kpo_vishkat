@@ -4,7 +4,14 @@ namespace kpo_vishkat.Models;
 
 public sealed class Scooter : iTransport, iInventoryItem
 {
-    int iInventoryItem;
-    string Name = "Scooter";
-    int Simplicity = 10;
+    public string InventoryNumber { get; }
+    public string Name { get; }
+    public int Simplicity { get; }
+
+    public Scooter(string inventoryNumber, string name, int simplicity)
+    {
+        InventoryNumber = inventoryNumber;
+        Name = name;
+        Simplicity = simplicity;
+    }
 }

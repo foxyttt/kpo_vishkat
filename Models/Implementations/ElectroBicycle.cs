@@ -2,12 +2,18 @@ using kpo_vishkat.Models;
 
 namespace kpo_vishkat.Models;
 
-public sealed class ElectroBicycle : iTransport, iInventoryItem, iEnergyCustomer
+public sealed class ElectroBicycle : iTransport, iEnergyCustomer
 {
-    int iInventoryItem;
-    string Name = "ElectroBicycle";
+    public string InventoryNumber { get; }
+    public string Name {  get; }
+    public double EnergyConsumption {  get; }
+    public int Simplicity {  get; }
 
-    double EnergyConsumption = 10;
-    int Simplicity = 4;
-    
+    public ElectroBicycle(string inventoryNumber, string name, double energyConsumption, int simplicity)
+    {
+        InventoryNumber = inventoryNumber;
+        Name = name;
+        EnergyConsumption = energyConsumption;
+        Simplicity = simplicity;
+    }
 }

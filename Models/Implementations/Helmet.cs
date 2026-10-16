@@ -4,6 +4,12 @@ namespace kpo_vishkat.Models;
 
 public sealed class Helmet : iInventoryItem
 {
-    int iInventoryItem;
-    string Name = "Scooter";
+    public string InventoryNumber { get; }
+    public string Name { get; }
+
+    public Helmet(string inventoryNumber, string name)
+    {
+        InventoryNumber = inventoryNumber;
+        Name = name;
+    }
 }

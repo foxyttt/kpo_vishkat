@@ -2,6 +2,6 @@ namespace kpo_vishkat.Models;
 
 public interface iInventoryItem
 {
-    int InventoryNumber {get; }
+    string InventoryNumber {get; }
     string Name {get; }
 }

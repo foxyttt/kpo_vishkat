@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="../kpo_vishkat.Test/kpo_vishkat.Test.csproj" />
+  <Project Path="kpo_vishkat.csproj" />
+</Solution>

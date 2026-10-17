@@ -13,12 +13,12 @@ internal class Program
         var services = new ServiceCollection();
 
         services.AddSingleton<Park>();
-        services.AddSingleton<iServiceCenter, ServiceCenter>();
+        services.AddSingleton<iServiceCenter, SimplicityDrivenServiceCenter>();
         services.AddSingleton<ParkReplenishment>();
 
         services.AddSingleton<iReportService, TransportCountReportService>();
         services.AddSingleton<iReportService, EnergyConsumptionReportService>();
-        services.AddSingleton<iReportService, BeginnerFriendlyReportService>();
+        services.AddSingleton<iReportService, SimplicityReportService>();
         services.AddSingleton<iReportService, InventoryReportService>();
 
         services.AddSingleton<ConsoleApplication>();
@@ -26,8 +26,7 @@ internal class Program
 
         using var provider = services.BuildServiceProvider();
 
-        if (args.Length == 1 &&
-            string.Equals(args[0], "--demo", StringComparison.OrdinalIgnoreCase))
+        if (args.Length == 1 && string.Equals(args[0], "--demo", StringComparison.OrdinalIgnoreCase))
         {
             provider.GetRequiredService<DemoRunner>().Run();
             return 0;

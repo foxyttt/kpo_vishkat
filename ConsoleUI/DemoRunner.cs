@@ -9,9 +9,7 @@ public class DemoRunner
     private readonly ParkReplenishment _parkReplenishment;
     private readonly IEnumerable<iReportService> _reports;
 
-    public DemoRunner(
-        ParkReplenishment parkReplenishment,
-        IEnumerable<iReportService> reports)
+    public DemoRunner(ParkReplenishment parkReplenishment, IEnumerable<iReportService> reports)
     {
         _parkReplenishment = parkReplenishment;
         _reports = reports;
@@ -34,8 +32,7 @@ public class DemoRunner
         _parkReplenishment.AddItem(new Helmet("HM-001", "Защитный шлем"));
         Console.WriteLine("Добавлен защитный шлем.");
 
-        _parkReplenishment.AddItem(new ChargingStation(
-            "CS-001", "Зарядная станция", 2.0));
+        _parkReplenishment.AddItem(new ChargingStation("CS-001", "Зарядная станция", 2.0));
         Console.WriteLine("Добавлена зарядная станция.");
 
         Console.WriteLine("\n=== Отчёты ===");
@@ -51,8 +48,6 @@ public class DemoRunner
     {
         bool accepted = _parkReplenishment.TryAddTransport(transport);
 
-        Console.WriteLine(
-            $"{transport.Name}: " +
-            (accepted ? "принят." : "отклонён."));
+        Console.WriteLine($"{transport.Name}: " + (accepted ? "принят." : "отклонён."));
     }
 }

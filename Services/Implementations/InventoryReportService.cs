@@ -17,10 +17,10 @@ public class InventoryReportService : iReportService
     public string generate()
     {
         if (_park.Items.Count == 0)
+        {
             return "Парк пока пуст.";
+        }
 
-        return "Инвентаризация:\n" +
-               string.Join("\n", _park.Items.Select(
-                   item => $"{item.Name} | № {item.InventoryNumber}"));
+        return "Инвентаризация:\n" + string.Join("\n", _park.Items.Select(item => $"{item.Name} | № {item.InventoryNumber}"));
     }
 }

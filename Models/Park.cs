@@ -18,8 +18,7 @@ public class Park
 
         if (_items.Any(x => x.InventoryNumber == item.InventoryNumber))
         {
-            throw new InvalidOperationException(
-                $"Объект с инвентарным номером {item.InventoryNumber} уже существует.");
+            throw new InvalidOperationException($"Объект с инвентарным номером {item.InventoryNumber} уже существует.");
         }
 
         _items.Add(item);
